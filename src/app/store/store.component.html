@@ -15,7 +15,7 @@ Products 9 cells on the right
         <div class='col-3 bg-info p-2'>
             Categories {{ Categories.length }}
             <button class='btn btn-block btn-outline-dark' (click)='changeCategory()'>
-                Home
+                All Products
             </button>
             <button *ngFor='let item of Categories' 
                 class='btn btn-block btn-outline-dark' 
@@ -25,7 +25,7 @@ Products 9 cells on the right
             </button>
         </div>
         <div class='col-9 bg-success p-2'>
-            Products {{ Products.length }}
+            Products
             <div *ngFor='let item of Products' class='card m-1 p-1 bg-dark' > 
                 <h4>
                     {{ item.name }}
@@ -36,6 +36,21 @@ Products 9 cells on the right
                 <div class='card bg-dark p-1'>
                     {{ item.description }}
                 </div>
+            </div>
+            <!-- Add pagination -->
+            <div class='form-inline float-left mr-1'>
+                <select class='form-control' [value] = 'productsPerPage'
+                (change)='changePageSize($event.target.value)'>
+                    <option value='4'> Four Products per Page </option>
+                    <option value='6'> Six Products per Page </option>
+                    <option value='8'> Eight Products per Page </option>
+                </select>
+            </div>
+            <div class='btn-group float-right'>
+                <button *ngFor='let page of getPageNumbers()' (click)='changePage(page)'
+                class='btn btn-outline-dark' [class.active]='page == selectedPage'>
+                    {{ page }}
+                </button>
             </div>
         </div>
     </div>

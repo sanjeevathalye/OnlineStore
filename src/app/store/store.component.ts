@@ -10,6 +10,9 @@ import { Product } from 'src/Model/product.model';
 export class StoreComponent implements OnInit {
 
   public selectedCategory = null;
+  public productsPerPage = 4 ;
+  public selectedPage = 1;
+  public arrayLength = 0;
 
   constructor( private repo: ProductRepository) { }
 
@@ -17,7 +20,9 @@ export class StoreComponent implements OnInit {
   }
 
   get Products() : Product[] {
-    return this.repo.getProducts(this.selectedCategory) ;
+    let pageIndex = (this.selectedPage -1) * this.productsPerPage ;
+    return this.repo.getProducts(this.selectedCategory).
+            slice(pageIndex, pageIndex + this.productsPerPage) ;
   }
 
   get Categories() : string[] {
@@ -27,4 +32,18 @@ export class StoreComponent implements OnInit {
   changeCategory(newCategory?: string) {
     this.selectedCategory = newCategory;
   }
+
+  changePage(newPage: number) {
+    this.selectedPage = newPage;
+  }
+
+  changePageSize(newSize: number) {
+    this.productsPerPage = newSize;
+  }
+
+  getPageNumbers(): number[] {
+    this.arrayLength = Math.ceil(this.repo.getProducts(this.selectedCategory).length / this.productsPerPage);
+        return Array(this.arrayLength).fill(0).map((x,i) => i + 1) ;
+  }
+
 }
