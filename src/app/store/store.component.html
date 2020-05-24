@@ -8,6 +8,7 @@ Products 9 cells on the right
     <div class='row' >
         <div class='col bg-danger text-white' > 
             <a class='navbar-brand'> Sanjeev's Online Store </a>
+            <app-cart-summary></app-cart-summary>
         </div>
     </div>
 
@@ -33,8 +34,11 @@ Products 9 cells on the right
                         {{ item.price | currency:"USD": "symbol":"2.2-2"}}
                     </span>
                 </h4>
-                <div class='card bg-dark p-1'>
+                <div class='card-text bg-dark p-1'>
                     {{ item.description }}
+                    <button class='btn btn-sm btn-success float-right' (click)='addProductToCart(item)'>
+                        Add to Cart
+                    </button>
                 </div>
             </div>
             <!-- Add pagination -->
