@@ -33,7 +33,7 @@ export class RestDataSource {
         return this.http.post<any>(this.baseUrl + 'login', 
         { name: user, password: pass}).pipe(map(response =>
             {
-                this.authToken = response.success? response.token = null;
+                this.authToken = response.success? response.token: null;
                 return response.success;
             }));
     }
