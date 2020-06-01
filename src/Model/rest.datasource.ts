@@ -6,7 +6,6 @@ import { Cart } from './../app/store/cart.model';
 import { Order } from './order.model';
 import { HttpClient } from '@angular/common/http'
 import { map } from 'rxjs/operators'
-import { ExecFileOptionsWithStringEncoding } from 'child_process';
 
 const PROTOCOL= 'http';
 const PORT= 4210 ;

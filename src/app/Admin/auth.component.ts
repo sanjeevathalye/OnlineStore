@@ -1,3 +1,4 @@
+import { AuthService } from './../../Model/auth.service';
 import { NgForm } from '@angular/forms';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
@@ -11,14 +12,20 @@ export class AuthComponent {
     public password: string ;
     public errorMessage: string ;
 
-    constructor(private router: Router) {
+    constructor(private router: Router, private auth: AuthService) {
    }
 
    authenticate( form: NgForm) {
 
         if( form.valid) {
             //valid form inputs. Perform the authentication
-            this.router.navigateByUrl('/admin/main');
+            this.auth.authenticate(this.username, this.password).
+            subscribe( response => {
+                if(response) {
+                    this.router.navigateByUrl('/admin/main');
+                }
+                this.errorMessage = 'Authentication failed!';
+            })
         }
         else {
             // incorrect authentication form inputs. set the error message
