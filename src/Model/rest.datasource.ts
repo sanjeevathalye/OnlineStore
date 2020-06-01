@@ -20,11 +20,11 @@ export class RestDataSource {
         this.baseUrl= `${PROTOCOL}://${location.hostname}:${PORT}/`
     }
 
-    getProduct(): Observable<Product[]> {
+    getProducts(): Observable<Product[]> {
         return this.http.get<Product[]>(this.baseUrl + 'products');
     }
 
-    saveOrders(order: Order) : Observable<Order> {
+    saveOrder(order: Order) : Observable<Order> {
         return this.http.post<Order>(this.baseUrl + 'orders', order);
     }
 
