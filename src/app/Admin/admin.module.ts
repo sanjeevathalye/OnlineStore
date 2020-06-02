@@ -1,4 +1,4 @@
-import { AuthGuard } from './auth.guard';
+
 import { AdminComponent } from './admin.component';
 import { AuthComponent } from './auth.component';
 import { RouterModule } from '@angular/router';
@@ -8,13 +8,12 @@ import { CommonModule } from '@angular/common';
 
 let routing = RouterModule.forChild([
         { path: 'auth', component: AuthComponent } ,
-        { path: 'main', component: AdminComponent, canActivate: [AuthGuard] },
+        { path: 'main', component: AdminComponent },
         { path: '**', redirectTo: 'auth'}
     ]);
 
 @NgModule ({
     imports: [CommonModule, routing, FormsModule],
-    providers: [AuthGuard],
     declarations: [AuthComponent, AdminComponent]
 })
 
