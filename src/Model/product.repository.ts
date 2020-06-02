@@ -9,7 +9,7 @@ export class ProductRepository {
     private products: Product[] = [] ;
     private categories: string[] = [] ;
 
-    constructor(ds: RestDataSource) {
+    constructor(private ds: RestDataSource) {
         ds.getProducts().subscribe( data => {
             this.products = data;
             this.categories = data.map(p => p.category)
@@ -31,5 +31,28 @@ export class ProductRepository {
     // get all categories
     getCategories(): string[] {
         return this.categories;
+    }
+
+    // Admin functions
+
+    saveProduct(product: Product) {
+        if(product.id == null || product.id == 0) // product does not exist in the repository
+        {
+            this.ds.saveProduct(product).subscribe(p => this.products.push(p));
+        }
+        else // product already exists in the repository. Update it
+        {
+            this.ds.updateProduct(product).subscribe (p =>
+                {
+                    this.products.splice(this.products.findIndex(p => p.id == product.id), 1, product);
+                });
+        }
+    }
+
+    deleteProduct(id: number) {
+        this.ds.deleteProduct(id).subscribe(p =>
+            {
+                this.products.splice(this.products.findIndex(p => p.id == id), 1);
+            });
     }
 }
