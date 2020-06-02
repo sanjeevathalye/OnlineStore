@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { Product } from './product.model';
 import { Cart } from './../app/store/cart.model';
 import { Order } from './order.model';
-import { HttpClient } from '@angular/common/http'
+import { HttpClient, HttpHandler, HttpHeaders } from '@angular/common/http'
 import { map } from 'rxjs/operators'
 
 const PROTOCOL= 'http';
@@ -35,5 +35,51 @@ export class RestDataSource {
                 this.authToken = response.success? response.token: null;
                 return response.success;
             }));
+    }
+
+    // Admin related functions
+
+    // Saving Product
+    saveProduct(product: Product): Observable<Product> {
+        return this.http.post<Product>(this.baseUrl + 'products', product, this.getOptions());
+    }
+
+    // Updating Product
+    updateProduct(product: Product): Observable<Product> {
+        return this.http.put<Product>
+            (`${this.baseUrl}products/${product.id}`, product, this.getOptions());
+    }
+
+    // Deleting product
+    deleteProduct(id: number): Observable<Product> {
+        return this.http.delete<Product> 
+        (`${this.baseUrl}products/${id}`, this.getOptions());  
+    }
+
+    // Getting orders
+    getOrders(): Observable<Order[]> {
+        return this.http.get<Order[]>(this.baseUrl + 'orders', this.getOptions());
+    }
+
+    // Updating order
+    updateOrder(order: Order): Observable<Order> {
+        return this.http.put<Order>
+            (`${this.baseUrl}orders/${order.orderID}`, order, this.getOptions());
+    }
+
+    // Deleting order
+    deleteOrder(id: number): Observable<Order>  
+    {
+        return this.http.delete<Order> 
+        (`${this.baseUrl}orders/${id}`, this.getOptions());  
+    }
+
+   private getOptions() {
+        return { 
+            headers: new HttpHeaders
+            ({
+                'Authorization': `Bearer<${this.authToken}`
+             })
+        }
     }
 }
