@@ -24,7 +24,9 @@ export class AuthComponent {
                 if(response) {
                     this.router.navigateByUrl('/admin/main');
                 }
-                this.errorMessage = 'Authentication failed!';
+                else {
+                    this.errorMessage = 'Authentication failed!';
+                }
             })
         }
         else {
