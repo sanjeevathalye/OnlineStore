@@ -1,5 +1,4 @@
 
-
 <div class='container-fluid'>
     <div class='row'>
         <div class='col bg-danger text-white'>
@@ -17,9 +16,9 @@
     </div>
 
 <!-- Get the shipping address -->
-<div>
-    <h5> Shipping Address </h5>
-</div>
+    <div>
+        <h5> Shipping Address </h5>
+    </div>
     <form *ngIf='!orderSent' #form='ngForm' novalidate (ngSubmit)='submitOrder(form)' class='m-2'>
         <div class='form-group'>
             <label> Name </label>
@@ -66,6 +65,5 @@
             <button class='btn btn-primary m-1' type='submit'> Complete Order </button>
         </div>
     </form>
-
 
 </div>
