@@ -12,7 +12,7 @@ import { CommonModule } from '@angular/common';
 
 let routing = RouterModule.forChild([
         { path: 'auth', component: AuthComponent } ,
-        { path: 'main', component: AdminComponent, 
+        { path: 'main', component: AdminComponent, canActivate: [AuthGuard],
             children:[
                 { path: 'products/:mode/:id',   component:ProductEditorComponent},
                 { path: 'products/:mode',       component:ProductEditorComponent},
@@ -26,6 +26,7 @@ let routing = RouterModule.forChild([
 
 @NgModule ({
     imports: [CommonModule, routing, FormsModule],
+    providers: [AuthGuard],
     declarations: [AuthComponent, AdminComponent, ProductEditorComponent, ProductTableComponent, OrderTableComponent]
 })
 

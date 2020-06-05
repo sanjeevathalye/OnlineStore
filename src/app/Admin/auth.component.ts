@@ -19,7 +19,7 @@ export class AuthComponent {
 
         if( form.valid) {
             //valid form inputs. Perform the authentication
-            /* temporarily comment this part 
+            // temporarily comment this part 
             this.auth.authenticate(this.username, this.password).
             subscribe( response => {
                 if(response) {
@@ -29,8 +29,8 @@ export class AuthComponent {
                     this.errorMessage = 'Authentication failed!';
                 }
             })
-            */
-           this.router.navigateByUrl('/admin/main');
+            
+           // this.router.navigateByUrl('/admin/main');
         }
         else {
             // incorrect authentication form inputs. set the error message
