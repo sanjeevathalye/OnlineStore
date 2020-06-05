@@ -21,7 +21,8 @@ export class OrderRepository {
     }
 
     getOrders(): Order[] {
-        return this.orders ;
+        if(! this.loaded)
+         return this.orders ;
     }
     
     saveOrder( order: Order): Observable<Order> {
